@@ -1,0 +1,33 @@
+services:
+  haproxy-public:
+    image: haproxy:2.8-alpine
+    container_name: haproxy-public
+    ports:
+      - "9080:8080"
+    volumes:
+      - ../haproxy/haproxy-public-final.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - kind
+    restart: unless-stopped
+
+  haproxy-internal:
+    image: haproxy:2.8-alpine
+    container_name: haproxy-internal
+    ports:
+      - "9081:8080"
+    volumes:
+      - ../haproxy/haproxy-internal-final.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - kind
+    restart: unless-stopped
+
+  curl:
+    image: curlimages/curl:8.13.0
+    container_name: curl
+    entrypoint: ["sleep", "infinity"]
+    networks:
+      - kind
+
+networks:
+  kind:
+    external: true
