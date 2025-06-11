@@ -1,9 +1,14 @@
-## Configuration
-* combination of /etc/nginx/nginx.conf and /etc/nginx/lua/cfg.json
+## Overview
+
+* `nginx-public-ingress-nginx-controller` is configured with an `externalTrafficPolicy=Cluster`
+* `nginx-internal-ingress-nginx-controller` is configured with an `externalTrafficPolicy=Local`
+  * because of this, it is rolled out as a `DaemonSet` instead of `deployment`
 
 
+### References
+* https://blog.cptsai.com/en/2020/11/15/k8s-external-traffic-policy deep dive on the k8 networking behavior ramifications of `externalTrafficPolicy`
 
-## Configuration
+### Configuration
 
 `kubectl -n nginx exec -it nginx-internal-ingress-nginx-controller-6lzs8 -- cat /etc/nginx/lua/cfg.json | jq`
 
