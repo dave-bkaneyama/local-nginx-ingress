@@ -8,7 +8,7 @@
 
 
 ## Quick start
-`make cluster helm lb nginx httpbin haproxy`
+`make all`
 
 
 ### Get ips for docker containers
