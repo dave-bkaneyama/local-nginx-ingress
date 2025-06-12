@@ -9,11 +9,14 @@
 * https://blog.cptsai.com/en/2020/11/15/k8s-external-traffic-policy deep dive on the k8 networking behavior ramifications of `externalTrafficPolicy`
 
 ### Configuration
+**Get configuration via**:
 
-`kubectl -n nginx exec -it nginx-internal-ingress-nginx-controller-6lzs8 -- cat /etc/nginx/lua/cfg.json | jq`
+`kubectl -n nginx exec -it nginx-internal-ingress-nginx-controller-6lzs8 -- nginx -T`
 
 
 ```
+bash info.sh
+
 Fetching container IPs...
 172.18.0.4 kind-cluster-worker
 172.18.0.3 kind-cluster-control-plane
@@ -240,6 +243,7 @@ curl -H "Host: httpbin-internal.local" http://172.18.255.201/headers
 
 
 
+### Helper scripts to run test cases
 ```
 # Public-1: client -> nginx-public -> httpBin
 docker exec -it curl curl -s -H "Host: httpbin-public.local" http://172.18.255.200/headers | \
