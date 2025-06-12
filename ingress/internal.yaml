@@ -5,17 +5,6 @@ metadata:
   namespace: httpbin
   annotations:
     kubernetes.io/ingress.class: "nginx-internal"
-    nginx.ingress.kubernetes.io/server-snippet: |
-      real_ip_header      X-Forwarded-For;
-      real_ip_recursive   on;
-      set_real_ip_from    0.0.0.0/0;
-      
-      map $http_x_forwarded_for $custom_full_x_forwarded_for {
-          default          "$http_x_forwarded_for, $realip_remote_addr";
-          ''               "$realip_remote_addr";
-      }
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header X-Forwarded-For $custom_full_x_forwarded_for;
 spec:
   ingressClassName: nginx-internal
   rules:
